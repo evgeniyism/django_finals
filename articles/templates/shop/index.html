@@ -1,0 +1,26 @@
+{% extends 'shop/layout.html' %}
+{% block title %}
+    Просто магазин
+{% endblock title %}
+{% block content %}
+    <main role="main">
+    {% for article in articles_list %}
+        <div>
+            <div class="jumbotron">
+                <div class="container">
+                    <h1 class="display-4"> {{ article.title }} </h1>
+                    <p> {{ article.text }} </p>
+                </div>
+            </div>
+            <div class="container mb-5">
+                <div class="row">
+                    {% for item in article.gadget.all %}
+                        {% include "shop/item.html" with item=item %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </main>
+{% include 'shop/footer.html' %}
+{% endblock content %}

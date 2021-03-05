@@ -1,0 +1,10 @@
+{% load static %}
+<div class="col-md-4">
+    <h2>{{item.title}}</h2>
+    <a href="/item-page.html?id={{item.id}}">
+        <img src="{% static 'img' %}{{item.image.url}}" width="180">
+    </a>
+<p>
+</p>
+    {% include "shop/button.html" %}
+</div>

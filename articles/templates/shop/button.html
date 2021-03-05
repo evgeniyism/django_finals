@@ -1,0 +1,14 @@
+{% if user.is_authenticated %}
+<form method="post" action="add_to_cart.html">
+
+    <input type="hidden" name="current" value="{{request.build_absolute_uri}}">
+    <input type="hidden" name="item" value="{{item.id}}">
+    <input type="submit" class="btn btn-secondary" value="Добавить в корзину">
+    {% csrf_token %}
+</form>
+
+{% else %}
+
+    <a href="login.html" class="btn btn-secondary">Добавить в корзину</a>
+
+{% endif %}

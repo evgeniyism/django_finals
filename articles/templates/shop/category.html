@@ -1,0 +1,48 @@
+{% extends 'shop/layout.html' %}
+{% block title %}
+  {{category_name}}
+{% endblock title %}
+{% block content %}
+{% load static %}
+
+<p role="main">
+    <h2><p align="center">
+        {{category_name}}
+    </p></h2>
+
+
+  <div class="container">
+    <div class="col">
+      {% for item in page_obj %}
+        <div class="col-md-6">
+            <h2>{{item.title}}</h2>
+            <a href="/item-page.html?id={{item.id}}">
+                <img src="{% static 'img'%}{{item.image.url}}" width="120">
+            </a>
+            <p>{{item.description}}</p>
+            {% include "shop/button.html" %}
+        </div>
+      {% endfor %}
+      <div class="pagination">
+          <span class="step-links">
+              {% if page_obj.has_previous %}
+                  <a href="?page=1&category={{ current_category }}">&laquo; Первая</a>
+                  <a href="?page={{ page_obj.previous_page_number }}&category={{ current_category }}">Предыдущая</a>
+              {% endif %}
+
+              <span class="current">
+                  Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+              </span>
+
+              {% if page_obj.has_next %}
+                  <a href="?page={{ page_obj.next_page_number }}&category={{ current_category }}">Следующая</a>
+                  <a href="?page={{ page_obj.paginator.num_pages }}&category={{ current_category }}">Последняя &raquo;</a>
+              {% endif %}
+          </span>
+      </div>
+    </div>
+  </div>
+
+</main>
+{% include 'shop/footer.html' %}
+{% endblock %}
