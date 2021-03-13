@@ -114,7 +114,10 @@ def show_cart(request):
 
 def checkout(request):
     user = User.objects.get(id=request.session['_auth_user_id'])
-    cart = Cart.objects.get(user=user)
+    try:
+        cart = Cart.objects.get(user=user)
+    except:
+        return redirect('cart')
     order = Order.objects.create(user=cart.user)
     cart_items = CartItem.objects.filter(cart=cart)
     for item in cart_items:
